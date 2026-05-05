@@ -3,693 +3,609 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terranourish — Ancient Wisdom, Modern Nourishment</title>
+<meta name="description" content="Terranourish — Premium whole-food supplements, cold-pressed oils, and spice blends crafted from ancient wisdom.">
+<title>Terranourish — Nourish from the Root</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--ink:#0D0D0B;--ink-80:rgba(13,13,11,.80);--ink-50:rgba(13,13,11,.50);--ink-20:rgba(13,13,11,.20);--ink-08:rgba(13,13,11,.08);--ink-04:rgba(13,13,11,.04);
+--gold:#B8841E;--gold-rich:#D4A030;--gold-pale:#FBF6EC;--gold-tint:#F5EAD4;
+--sage:#3B5240;--sage-mid:#4D6B52;--sage-light:#EEF3EE;
+--white:#FEFDFB;--off:#F8F5EF;--border:rgba(13,13,11,.09);
+--serif:'Playfair Display',Georgia,serif;--sans:'Outfit',system-ui,sans-serif;
+--r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;--r-full:999px;
+--sh-xs:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+--sh-sm:0 4px 12px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.04);
+--sh-md:0 12px 32px rgba(0,0,0,.09),0 4px 8px rgba(0,0,0,.04);
+--sh-lg:0 24px 56px rgba(0,0,0,.12),0 8px 16px rgba(0,0,0,.05);
+--ease:cubic-bezier(0.16,1,0.3,1)
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--sans);background:var(--white);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:var(--sans);border:none;background:none}ul{list-style:none}
 
-  :root {
-    --gold: #C8942A;
-    --gold-light: #F0C96A;
-    --gold-pale: #FAF3E0;
-    --forest: #111C11;
-    --forest-mid: #1E3020;
-    --moss: #3D5C35;
-    --cream: #F5EFE2;
-    --warm-white: #FDFAF4;
-    --charcoal: #1C1C1A;
-    --muted: #6E6559;
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'DM Sans', system-ui, sans-serif;
-  }
+/* UTILITIES */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.eyebrow::before{content:'';display:block;width:24px;height:1.5px;background:var(--gold);border-radius:2px}
+.section-title{font-family:var(--serif);font-size:clamp(30px,4vw,52px);font-weight:500;line-height:1.1;color:var(--ink);letter-spacing:-.02em}
+.section-title em{font-style:italic;color:var(--sage)}
+.section-body{font-size:16px;line-height:1.75;color:var(--ink-50);max-width:520px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;padding:13px 26px;border-radius:var(--r-full);transition:all .22s var(--ease);white-space:nowrap;font-family:var(--sans)}
+.btn-primary{background:var(--ink);color:var(--white);box-shadow:var(--sh-sm)}
+.btn-primary:hover{background:var(--sage);transform:translateY(-1px);box-shadow:var(--sh-md)}
+.btn-ghost{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.22)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);transform:translateY(-1px)}
+.btn-gold{background:var(--gold-rich);color:var(--white);box-shadow:0 4px 16px rgba(184,132,30,.35)}
+.btn-gold:hover{background:var(--gold);transform:translateY(-1px);box-shadow:0 8px 24px rgba(184,132,30,.4)}
+.btn-white{background:var(--white);color:var(--ink);box-shadow:var(--sh-sm)}
+.btn-white:hover{transform:translateY(-1px);box-shadow:var(--sh-md)}
+.arrow{font-size:16px;transition:transform .2s}.btn:hover .arrow{transform:translateX(3px)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.09s}.d2{transition-delay:.18s}.d3{transition-delay:.27s}.d4{transition-delay:.36s}
 
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--sans); background: var(--warm-white); color: var(--charcoal); overflow-x: hidden; }
+/* NAV */
+#nav{position:fixed;inset:0 0 auto;z-index:999;padding:0 40px;height:66px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,box-shadow .3s}
+#nav.scrolled{background:rgba(254,253,251,.93);backdrop-filter:blur(16px);box-shadow:0 1px 0 var(--border),var(--sh-xs)}
+.nav-logo{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--ink);letter-spacing:-.01em}
+.nav-logo .dot{color:var(--gold-rich)}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{font-size:14px;font-weight:400;color:var(--ink-80);padding:7px 14px;border-radius:var(--r-full);transition:background .18s,color .18s}
+.nav-links a:hover{background:var(--ink-04);color:var(--ink)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-shop{font-size:13.5px;font-weight:600;background:var(--ink);color:var(--white);padding:9px 20px;border-radius:var(--r-full);transition:background .2s,transform .2s}
+.nav-shop:hover{background:var(--sage);transform:translateY(-1px)}
+.nav-burger{display:none;flex-direction:column;gap:5px;padding:8px;cursor:pointer;border-radius:8px;transition:background .18s}
+.nav-burger:hover{background:var(--ink-04)}
+.nav-burger span{display:block;width:22px;height:1.5px;background:var(--ink);border-radius:2px;transition:transform .3s,opacity .3s}
+.nav-drawer{position:fixed;inset:66px 0 0;background:var(--white);z-index:998;padding:28px;display:flex;flex-direction:column;gap:6px;transform:translateX(100%);transition:transform .35s var(--ease);box-shadow:-4px 0 24px rgba(0,0,0,.08)}
+.nav-drawer.open{transform:none}
+.nav-drawer a{font-size:18px;font-weight:500;color:var(--ink);padding:14px 16px;border-radius:var(--r-md);transition:background .18s}
+.nav-drawer a:hover{background:var(--off)}
+.nav-drawer .dcta{margin-top:16px;background:var(--ink);color:var(--white);text-align:center;border-radius:var(--r-full);font-size:16px;font-family:var(--sans)}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(17, 28, 17, 0.92);
-    backdrop-filter: blur(12px);
-    padding: 0 60px;
-    height: 68px;
-    display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 1px solid rgba(200,148,42,0.15);
-  }
-  .logo { font-family: var(--serif); font-size: 24px; color: #F5EDD8; font-weight: 300; letter-spacing: 0.04em; text-decoration: none; }
-  .logo em { font-style: italic; color: var(--gold-light); }
-  .nav-links { display: flex; gap: 36px; list-style: none; }
-  .nav-links a { font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245,237,216,0.55); text-decoration: none; transition: color 0.25s; font-weight: 400; }
-  .nav-links a:hover { color: var(--gold-light); }
-  .nav-cta {
-    font-size: 11.5px; color: var(--gold-light); letter-spacing: 0.12em; text-transform: uppercase;
-    border: 1px solid rgba(200,148,42,0.45); padding: 9px 22px; border-radius: 2px;
-    text-decoration: none; transition: background 0.25s, color 0.25s;
-    font-weight: 500;
-  }
-  .nav-cta:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
+/* HERO */
+.hero{min-height:100svh;display:grid;grid-template-columns:1fr 1fr;padding-top:66px;overflow:hidden}
+.hero-left{background:var(--sage);padding:80px 64px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.hero-left::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 0% 100%,rgba(184,132,30,.18) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 100% 0%,rgba(255,255,255,.04) 0%,transparent 50%)}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:32px;position:relative}
+.hero-eyebrow::before{content:'';width:24px;height:1.5px;background:var(--gold-rich);border-radius:2px}
+.hero-h1{font-family:var(--serif);font-size:clamp(42px,5.5vw,72px);font-weight:400;line-height:1.06;color:#FEFDFB;letter-spacing:-.025em;margin-bottom:24px;position:relative}
+.hero-h1 em{font-style:italic;color:var(--gold-rich)}
+.hero-p{font-size:16px;line-height:1.75;font-weight:300;color:rgba(255,255,255,.58);max-width:400px;margin-bottom:48px;position:relative}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;position:relative}
+.hero-stats{position:relative;display:flex;gap:40px;margin-top:64px;padding-top:40px;border-top:1px solid rgba(255,255,255,.12)}
+.stat-num{font-family:var(--serif);font-size:36px;font-weight:400;color:#FEFDFB;line-height:1}
+.stat-num sup{font-size:18px;color:var(--gold-rich)}
+.stat-label{font-size:12px;color:rgba(255,255,255,.42);margin-top:5px;font-weight:400}
+.hero-right{position:relative;overflow:hidden;background:var(--off)}
+.hero-right img{width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(.88) saturate(1.05);transition:transform 10s ease}
+.hero-right:hover img{transform:scale(1.04)}
+.hero-pill{position:absolute;bottom:36px;left:36px;background:rgba(254,253,251,.92);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--r-full);padding:10px 20px 10px 10px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh-md);animation:floatUp .8s .6s var(--ease) both}
+.pill-icon{width:36px;height:36px;border-radius:50%;background:var(--sage-light);display:flex;align-items:center;justify-content:center;font-size:18px}
+.pill-text{font-size:13px;font-weight:500;color:var(--ink)}
+.pill-sub{font-size:11px;color:var(--ink-50);margin-top:1px}
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: grid; grid-template-columns: 1fr 1fr;
-    padding-top: 68px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-left {
-    background: var(--forest);
-    padding: 100px 70px;
-    display: flex; flex-direction: column; justify-content: center;
-    position: relative; z-index: 2;
-  }
-  .hero-left::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 0% 100%, rgba(200,148,42,0.12) 0%, transparent 55%);
-    pointer-events: none;
-  }
-  .eyebrow {
-    font-size: 10.5px; letter-spacing: 0.28em; text-transform: uppercase;
-    color: var(--gold-light); margin-bottom: 28px; font-weight: 400;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
-  .hero-title {
-    font-family: var(--serif); font-size: 72px; line-height: 1.02;
-    font-weight: 300; color: #F5EDD8; margin-bottom: 28px;
-    animation: fadeUp 1s ease both;
-  }
-  .hero-title em { font-style: italic; color: var(--gold-light); }
-  .hero-sub {
-    font-size: 15px; line-height: 1.8; color: rgba(245,237,216,0.55);
-    max-width: 380px; margin-bottom: 50px; font-weight: 300;
-    animation: fadeUp 1s 0.15s ease both;
-  }
-  .hero-btns { display: flex; gap: 14px; animation: fadeUp 1s 0.3s ease both; }
-  .btn-primary {
-    background: var(--gold); color: #fff; font-family: var(--sans);
-    font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
-    padding: 15px 36px; border: none; cursor: pointer; border-radius: 2px;
-    font-weight: 500; transition: background 0.25s, transform 0.2s;
-    text-decoration: none; display: inline-block;
-  }
-  .btn-primary:hover { background: #A87820; transform: translateY(-1px); }
-  .btn-ghost {
-    background: transparent; color: rgba(245,237,216,0.65);
-    font-family: var(--sans); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
-    padding: 15px 36px; border: 1px solid rgba(245,237,216,0.2); cursor: pointer;
-    border-radius: 2px; font-weight: 400; transition: border-color 0.25s, color 0.25s;
-    text-decoration: none; display: inline-block;
-  }
-  .btn-ghost:hover { border-color: rgba(245,237,216,0.5); color: rgba(245,237,216,0.9); }
-  .hero-right {
-    position: relative; overflow: hidden;
-  }
-  .hero-right img {
-    width: 100%; height: 100%; object-fit: cover;
-    display: block; filter: brightness(0.75);
-    transition: transform 8s ease;
-  }
-  .hero-right:hover img { transform: scale(1.04); }
-  .hero-right-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(90deg, rgba(17,28,17,0.45) 0%, transparent 40%);
-  }
-  .hero-badge {
-    position: absolute; bottom: 48px; right: 48px;
-    background: rgba(17,28,17,0.85); backdrop-filter: blur(8px);
-    border: 1px solid rgba(200,148,42,0.35);
-    border-radius: 8px; padding: 20px 24px; text-align: center;
-    animation: fadeIn 1s 0.5s ease both;
-  }
-  .hero-badge-num { font-family: var(--serif); font-size: 40px; font-weight: 300; color: var(--gold-light); line-height: 1; }
-  .hero-badge-label { font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,237,216,0.55); margin-top: 6px; }
+/* TICKER */
+.ticker{background:var(--gold-tint);border-top:1px solid rgba(184,132,30,.15);border-bottom:1px solid rgba(184,132,30,.15);overflow:hidden;padding:13px 0}
+.ticker-track{display:flex;white-space:nowrap;animation:ticker 30s linear infinite}
+.ticker-item{font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);padding:0 36px;display:flex;align-items:center;gap:36px}
+.ticker-item::after{content:'◆';font-size:8px;color:var(--gold-rich);opacity:.5}
 
-  /* ── MARQUEE ── */
-  .marquee-bar {
-    background: var(--gold); overflow: hidden;
-    padding: 14px 0; white-space: nowrap;
-  }
-  .marquee-track {
-    display: inline-flex; gap: 0;
-    animation: marquee 28s linear infinite;
-  }
-  .marquee-item {
-    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--forest); font-weight: 500; padding: 0 40px;
-  }
-  .marquee-dot { color: var(--forest-mid); }
+/* TRUST BAR */
+.trust-bar{background:var(--white);padding:0 40px;display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+.trust-item{display:flex;align-items:center;gap:14px;padding:28px 40px;border-right:1px solid var(--border);transition:background .2s;cursor:default}
+.trust-item:last-child{border-right:none}
+.trust-item:hover{background:var(--off)}
+.trust-icon{width:44px;height:44px;border-radius:var(--r-md);background:var(--sage-light);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.trust-title{font-size:14px;font-weight:600;color:var(--ink)}
+.trust-sub{font-size:12px;color:var(--ink-50);margin-top:2px}
 
-  /* ── PHILOSOPHY ── */
-  .philosophy {
-    padding: 120px 60px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
-    align-items: center; background: var(--warm-white);
-  }
-  .phil-img-wrap { position: relative; }
-  .phil-img-wrap img { width: 100%; height: 580px; object-fit: cover; border-radius: 4px; display: block; }
-  .phil-img-accent {
-    position: absolute; top: -24px; left: -24px;
-    width: 160px; height: 160px; border: 1px solid rgba(200,148,42,0.3);
-    border-radius: 4px; z-index: -1;
-  }
-  .phil-img-quote {
-    position: absolute; bottom: 32px; left: -48px;
-    background: var(--forest); padding: 24px 28px;
-    border-radius: 4px; max-width: 280px;
-    border-left: 3px solid var(--gold);
-  }
-  .phil-img-quote p { font-family: var(--serif); font-size: 17px; font-style: italic; color: #F5EDD8; font-weight: 300; line-height: 1.5; }
-  .phil-content {}
-  .section-eyebrow {
-    font-size: 10.5px; letter-spacing: 0.28em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 18px; font-weight: 500;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .section-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
-  .section-title { font-family: var(--serif); font-size: 50px; line-height: 1.08; font-weight: 300; color: var(--charcoal); margin-bottom: 24px; }
-  .section-title em { font-style: italic; color: var(--moss); }
-  .section-body { font-size: 15px; line-height: 1.8; color: var(--muted); font-weight: 300; margin-bottom: 40px; }
-  .stat-row { display: flex; gap: 48px; margin-top: 48px; padding-top: 48px; border-top: 1px solid rgba(0,0,0,0.07); }
-  .stat {}
-  .stat-num { font-family: var(--serif); font-size: 44px; font-weight: 300; color: var(--charcoal); line-height: 1; }
-  .stat-num em { font-style: italic; color: var(--gold); }
-  .stat-label { font-size: 12px; color: var(--muted); margin-top: 6px; font-weight: 300; letter-spacing: 0.04em; }
+/* PHILOSOPHY */
+.philosophy{padding:120px 40px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1280px;margin:0 auto}
+.phil-media{position:relative}
+.phil-img-main{width:100%;height:580px;object-fit:cover;object-position:center 30%;border-radius:var(--r-xl);box-shadow:var(--sh-lg)}
+.phil-img-inset{position:absolute;bottom:-28px;right:-28px;width:180px;height:180px;object-fit:cover;object-position:center;border-radius:var(--r-lg);border:4px solid var(--white);box-shadow:var(--sh-md)}
+.phil-badge{position:absolute;top:28px;left:-28px;background:var(--white);border-radius:var(--r-lg);padding:18px 22px;box-shadow:var(--sh-md);border:1px solid var(--border)}
+.phil-badge-num{font-family:var(--serif);font-size:34px;font-weight:500;color:var(--sage);line-height:1}
+.phil-badge-label{font-size:11px;color:var(--ink-50);margin-top:4px}
+.phil-content{padding-right:20px}
+.phil-content .eyebrow{margin-bottom:20px}
+.phil-content .section-title{margin-bottom:20px}
+.phil-content .section-body{margin-bottom:16px}
+.phil-list{margin:32px 0 40px;display:flex;flex-direction:column;gap:14px}
+.phil-item{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;background:var(--off);border-radius:var(--r-md);border:1px solid var(--border);transition:border-color .2s,box-shadow .2s}
+.phil-item:hover{border-color:var(--gold);box-shadow:var(--sh-xs)}
+.phil-item-icon{width:36px;height:36px;border-radius:var(--r-sm);background:var(--sage-light);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:17px}
+.phil-item-title{font-size:14px;font-weight:600;color:var(--ink)}
+.phil-item-desc{font-size:13px;color:var(--ink-50);margin-top:2px;line-height:1.55}
 
-  /* ── PRODUCTS ── */
-  .products-section { background: var(--cream); padding: 120px 60px; }
-  .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; }
-  .section-header .section-title { margin-bottom: 0; }
-  .view-all {
-    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--gold); border-bottom: 1px solid var(--gold);
-    padding-bottom: 2px; text-decoration: none; font-weight: 500;
-    transition: color 0.2s;
-  }
-  .view-all:hover { color: var(--charcoal); border-color: var(--charcoal); }
-  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-  .product-card {
-    background: var(--warm-white); border-radius: 8px;
-    overflow: hidden; cursor: pointer;
-    transition: transform 0.35s cubic-bezier(0.25,0.8,0.25,1), box-shadow 0.35s;
-    border: 1px solid rgba(0,0,0,0.06);
-  }
-  .product-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,0.1); }
-  .product-img { position: relative; overflow: hidden; height: 280px; }
-  .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; display: block; }
-  .product-card:hover .product-img img { transform: scale(1.07); }
-  .product-badge {
-    position: absolute; top: 16px; left: 16px;
-    background: var(--forest); color: var(--gold-light);
-    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
-    padding: 6px 12px; border-radius: 2px; font-weight: 500;
-  }
-  .product-body { padding: 24px 26px 26px; }
-  .product-category { font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 400; }
-  .product-name { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--charcoal); margin-bottom: 10px; }
-  .product-desc { font-size: 13.5px; line-height: 1.65; color: var(--muted); font-weight: 300; margin-bottom: 20px; }
-  .product-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 18px; border-top: 1px solid rgba(0,0,0,0.07); }
-  .price { font-family: var(--serif); font-size: 24px; font-weight: 400; color: var(--charcoal); }
-  .price small { font-size: 12px; color: var(--muted); font-family: var(--sans); font-weight: 300; display: block; }
-  .add-btn {
-    background: var(--charcoal); color: #fff;
-    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
-    padding: 10px 20px; border: none; border-radius: 2px; cursor: pointer;
-    font-family: var(--sans); font-weight: 500; transition: background 0.2s;
-  }
-  .add-btn:hover { background: var(--forest); }
+/* PRODUCTS */
+.products-section{background:var(--off);padding:100px 40px}
+.sec-header{max-width:1280px;margin:0 auto 60px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.sec-header .eyebrow{margin-bottom:16px}
+.view-all{font-size:14px;font-weight:600;color:var(--sage);display:flex;align-items:center;gap:6px;transition:gap .2s}
+.view-all:hover{gap:10px}
+.products-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.product-card{background:var(--white);border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--border);box-shadow:var(--sh-xs);transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .25s;cursor:pointer}
+.product-card:hover{transform:translateY(-6px);box-shadow:var(--sh-lg);border-color:transparent}
+.product-img-wrap{position:relative;height:260px;overflow:hidden;background:var(--off)}
+.product-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.product-card:hover .product-img-wrap img{transform:scale(1.06)}
+.product-badge{position:absolute;top:14px;left:14px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--white);padding:5px 12px;border-radius:var(--r-full)}
+.badge-gold{background:var(--gold-rich)}.badge-sage{background:var(--sage)}
+.product-body{padding:24px 24px 26px}
+.product-cat{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.product-name{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--ink);margin-bottom:10px;line-height:1.2;letter-spacing:-.01em}
+.product-desc{font-size:13.5px;line-height:1.65;color:var(--ink-50);margin-bottom:22px}
+.product-footer{display:flex;align-items:center;justify-content:space-between;padding-top:18px;border-top:1px solid var(--border)}
+.product-price{font-family:var(--serif);font-size:26px;font-weight:500;color:var(--ink);line-height:1}
+.product-price-sub{font-size:12px;color:var(--ink-50);margin-top:4px;font-family:var(--sans);font-weight:400}
+.cart-btn{font-size:13px;font-weight:600;background:var(--ink);color:var(--white);padding:10px 20px;border-radius:var(--r-full);border:none;cursor:pointer;transition:background .2s,transform .2s;font-family:var(--sans)}
+.cart-btn:hover{background:var(--sage);transform:translateY(-1px)}
+.cart-btn.added{background:var(--sage)}
 
-  /* ── FEATURED FULL ── */
-  .full-feature {
-    display: grid; grid-template-columns: 1fr 1fr;
-    min-height: 680px;
-  }
-  .ff-img { position: relative; overflow: hidden; }
-  .ff-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 8s ease; }
-  .full-feature:hover .ff-img img { transform: scale(1.04); }
-  .ff-content {
-    background: var(--forest);
-    padding: 100px 80px;
-    display: flex; flex-direction: column; justify-content: center;
-    position: relative; overflow: hidden;
-  }
-  .ff-content::after {
-    content: '';
-    position: absolute; bottom: -80px; right: -80px;
-    width: 280px; height: 280px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,148,42,0.12) 0%, transparent 70%);
-  }
-  .ff-eyebrow { font-size: 10.5px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; font-weight: 400; }
-  .ff-title { font-family: var(--serif); font-size: 48px; font-weight: 300; color: #F5EDD8; line-height: 1.1; margin-bottom: 20px; }
-  .ff-title em { font-style: italic; color: var(--gold-light); }
-  .ff-body { font-size: 15px; line-height: 1.8; color: rgba(245,237,216,0.55); font-weight: 300; margin-bottom: 40px; max-width: 380px; }
-  .ff-ingredients { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; }
-  .ff-tag {
-    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-    background: rgba(200,148,42,0.12); color: var(--gold-light);
-    border: 1px solid rgba(200,148,42,0.25);
-    padding: 7px 14px; border-radius: 2px; font-weight: 400;
-  }
+/* FEATURED SPLIT */
+.featured-split{display:grid;grid-template-columns:1fr 1fr;min-height:620px;overflow:hidden}
+.feat-img{position:relative;overflow:hidden}
+.feat-img img{width:100%;height:100%;object-fit:cover;object-position:center 40%;transition:transform 10s ease}
+.featured-split:hover .feat-img img{transform:scale(1.03)}
+.feat-content{background:var(--sage);padding:80px 72px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.feat-content::after{content:'';position:absolute;bottom:-100px;right:-100px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(184,132,30,.15) 0%,transparent 70%)}
+.feat-eyebrow{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.42);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.feat-eyebrow::before{content:'';width:20px;height:1.5px;background:var(--gold-rich);border-radius:2px}
+.feat-title{font-family:var(--serif);font-size:clamp(30px,3.5vw,46px);font-weight:400;color:#FEFDFB;line-height:1.1;margin-bottom:20px;letter-spacing:-.02em}
+.feat-title em{font-style:italic;color:var(--gold-rich)}
+.feat-body{font-size:15px;line-height:1.75;color:rgba(255,255,255,.52);margin-bottom:36px;max-width:400px}
+.feat-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:44px}
+.feat-tag{font-size:12px;font-weight:500;background:rgba(255,255,255,.08);color:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.12);padding:7px 16px;border-radius:var(--r-full);transition:background .2s}
+.feat-tag:hover{background:rgba(255,255,255,.14)}
 
-  /* ── GALLERY GRID ── */
-  .gallery-section { padding: 120px 60px; background: var(--warm-white); }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 280px 280px;
-    gap: 16px; margin-top: 64px;
-  }
-  .gallery-item { overflow: hidden; border-radius: 4px; cursor: pointer; position: relative; }
-  .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease, filter 0.4s; }
-  .gallery-item:hover img { transform: scale(1.08); filter: brightness(0.85); }
-  .gallery-item.tall { grid-row: span 2; }
-  .gallery-item.wide { grid-column: span 2; }
-  .gallery-caption {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(17,28,17,0.8));
-    padding: 32px 20px 20px;
-    transform: translateY(100%); transition: transform 0.35s ease;
-  }
-  .gallery-item:hover .gallery-caption { transform: translateY(0); }
-  .gallery-caption p { font-family: var(--serif); font-size: 16px; color: #F5EDD8; font-weight: 300; font-style: italic; }
+/* GALLERY */
+.gallery-section{padding:100px 40px;max-width:1280px;margin:0 auto}
+.gallery-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:280px 280px;gap:16px;margin-top:48px}
+.g-item{position:relative;overflow:hidden;border-radius:var(--r-lg);cursor:pointer}
+.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease),filter .4s}
+.g-item:hover img{transform:scale(1.07);filter:brightness(.8)}
+.g-item.g-tall{grid-row:span 2}
+.g-item.g-wide{grid-column:span 2}
+.g-cap{position:absolute;inset:0;background:linear-gradient(0deg,rgba(13,13,11,.72) 0%,transparent 45%);display:flex;align-items:flex-end;padding:22px;opacity:0;transition:opacity .35s}
+.g-item:hover .g-cap{opacity:1}
+.g-cap p{font-family:var(--serif);font-size:16px;font-style:italic;color:#FEFDFB;font-weight:400}
 
-  /* ── INGREDIENTS ── */
-  .ingredients-section {
-    background: var(--forest); padding: 120px 60px;
-    position: relative; overflow: hidden;
-  }
-  .ingredients-section::before {
-    content: '';
-    position: absolute; top: -120px; right: -120px;
-    width: 500px; height: 500px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,148,42,0.08) 0%, transparent 65%);
-  }
-  .ingredients-section .section-eyebrow,
-  .ingredients-section .section-title { color: #F5EDD8; }
-  .ingredients-section .section-title em { color: var(--gold-light); }
-  .ingredients-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 64px; }
-  .ingredient-card {
-    border: 1px solid rgba(200,148,42,0.15);
-    border-radius: 8px; overflow: hidden;
-    transition: border-color 0.3s, transform 0.3s;
-    cursor: pointer;
-  }
-  .ingredient-card:hover { border-color: rgba(200,148,42,0.45); transform: translateY(-4px); }
-  .ingredient-img { height: 200px; position: relative; overflow: hidden; }
-  .ingredient-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.8); transition: transform 0.6s, filter 0.4s; }
-  .ingredient-card:hover .ingredient-img img { transform: scale(1.08); filter: brightness(0.9); }
-  .ingredient-body { padding: 20px; background: rgba(255,255,255,0.04); }
-  .ingredient-name { font-family: var(--serif); font-size: 20px; font-weight: 400; color: #F5EDD8; margin-bottom: 6px; }
-  .ingredient-name em { font-style: italic; }
-  .ingredient-desc { font-size: 13px; color: rgba(245,237,216,0.45); line-height: 1.6; font-weight: 300; }
-  .ingredient-benefit {
-    margin-top: 12px; display: inline-block;
-    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--gold-light); background: rgba(200,148,42,0.1);
-    border: 1px solid rgba(200,148,42,0.2); padding: 5px 12px; border-radius: 2px;
-  }
+/* INGREDIENTS */
+.ingredients-section{background:var(--ink);padding:100px 40px;position:relative;overflow:hidden}
+.ingredients-section::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(184,132,30,.07) 0%,transparent 65%)}
+.ing-header{max-width:1280px;margin:0 auto 60px;display:flex;justify-content:space-between;align-items:flex-end}
+.ing-header .eyebrow{color:var(--gold-rich)}
+.ing-header .eyebrow::before{background:var(--gold-rich)}
+.ing-header .section-title{color:#FEFDFB}
+.ing-header .section-title em{color:var(--gold-rich)}
+.ingredients-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.ing-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-lg);overflow:hidden;transition:border-color .3s,transform .35s var(--ease),background .3s;cursor:pointer}
+.ing-card:hover{border-color:rgba(184,132,30,.4);transform:translateY(-5px);background:rgba(255,255,255,.06)}
+.ing-img{height:196px;overflow:hidden}
+.ing-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.75) saturate(1.1);transition:transform .6s var(--ease),filter .4s}
+.ing-card:hover .ing-img img{transform:scale(1.08);filter:brightness(.85)}
+.ing-body{padding:20px}
+.ing-latin{font-family:var(--serif);font-size:17px;font-style:italic;color:#FEFDFB;margin-bottom:4px}
+.ing-name{font-size:11px;font-weight:600;color:rgba(255,255,255,.38);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.ing-desc{font-size:13px;line-height:1.6;color:rgba(255,255,255,.38);margin-bottom:14px}
+.ing-benefit{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-rich);background:rgba(184,132,30,.12);border:1px solid rgba(184,132,30,.2);padding:5px 13px;border-radius:var(--r-full);display:inline-block}
 
-  /* ── DRINKS FEATURE ── */
-  .drinks-section { padding: 120px 60px; background: var(--cream); }
-  .drinks-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 20px; margin-top: 64px; align-items: stretch; }
-  .drink-card {
-    position: relative; border-radius: 8px; overflow: hidden;
-    cursor: pointer; min-height: 480px;
-    transition: transform 0.35s;
-  }
-  .drink-card:hover { transform: scale(1.02); }
-  .drink-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .drink-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(180deg, transparent 30%, rgba(17,28,17,0.92) 100%);
-  }
-  .drink-info {
-    position: absolute; bottom: 0; left: 0; right: 0; padding: 32px 28px;
-  }
-  .drink-category { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 8px; font-weight: 400; }
-  .drink-name { font-family: var(--serif); font-size: 22px; color: #F5EDD8; font-weight: 300; line-height: 1.2; }
-  .drink-name em { font-style: italic; }
-  .drink-note { font-size: 12.5px; color: rgba(245,237,216,0.5); margin-top: 6px; font-weight: 300; }
+/* DRINKS */
+.drinks-section{padding:100px 40px;background:var(--off)}
+.drinks-grid{max-width:1280px;margin:48px auto 0;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:20px}
+.drink-card{position:relative;border-radius:var(--r-xl);overflow:hidden;min-height:480px;cursor:pointer;box-shadow:var(--sh-sm);transition:transform .35s var(--ease),box-shadow .35s}
+.drink-card:hover{transform:scale(1.02);box-shadow:var(--sh-lg)}
+.drink-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.drink-card:hover img{transform:scale(1.05)}
+.drink-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(13,13,11,.88) 100%)}
+.drink-info{position:absolute;bottom:0;left:0;right:0;padding:28px 26px}
+.drink-cat{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-rich);margin-bottom:7px}
+.drink-name{font-family:var(--serif);font-size:21px;font-weight:400;color:#FEFDFB;line-height:1.2;margin-bottom:7px}
+.drink-name em{font-style:italic}
+.drink-note{font-size:12px;color:rgba(255,255,255,.42)}
+.drink-cta{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:12px;font-weight:600;color:var(--white);background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:8px 16px;border-radius:var(--r-full);transition:background .2s;font-family:var(--sans)}
+.drink-cta:hover{background:rgba(255,255,255,.2)}
 
-  /* ── TESTIMONIAL ── */
-  .testimonial-section { background: var(--forest); padding: 100px 60px; }
-  .testimonials-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 64px; }
-  .testi-card {
-    border: 1px solid rgba(200,148,42,0.15); border-radius: 8px; padding: 36px;
-    position: relative; transition: border-color 0.3s;
-  }
-  .testi-card:hover { border-color: rgba(200,148,42,0.4); }
-  .testi-stars { color: var(--gold-light); font-size: 14px; letter-spacing: 3px; margin-bottom: 20px; }
-  .testi-quote { font-family: var(--serif); font-size: 19px; font-style: italic; font-weight: 300; color: #F5EDD8; line-height: 1.55; margin-bottom: 24px; }
-  .testi-author { font-size: 12px; color: rgba(245,237,216,0.4); letter-spacing: 0.05em; }
-  .testi-author strong { color: rgba(245,237,216,0.7); font-weight: 500; display: block; margin-bottom: 3px; }
+/* PROCESS */
+.process-section{padding:100px 40px;background:var(--white)}
+.process-inner{max-width:1280px;margin:0 auto}
+.process-header{margin-bottom:72px}
+.process-header .eyebrow{margin-bottom:16px}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.process-steps::before{content:'';position:absolute;top:27px;left:calc(12.5% + 14px);right:calc(12.5% + 14px);height:1px;background:linear-gradient(90deg,var(--border) 0%,var(--gold) 50%,var(--border) 100%)}
+.process-step{text-align:center;padding:0 24px}
+.step-num-wrap{display:flex;justify-content:center;margin-bottom:28px}
+.step-num{width:54px;height:54px;border-radius:50%;border:1.5px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:20px;font-weight:400;color:var(--gold);position:relative;z-index:1;transition:background .3s,border-color .3s,transform .3s;box-shadow:var(--sh-xs)}
+.process-step:hover .step-num{background:var(--sage);color:var(--white);border-color:var(--sage);transform:scale(1.1);box-shadow:var(--sh-sm)}
+.step-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:10px}
+.step-desc{font-size:13.5px;line-height:1.65;color:var(--ink-50)}
 
-  /* ── PROCESS ── */
-  .process-section { padding: 120px 60px; background: var(--warm-white); }
-  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 80px; position: relative; }
-  .process-steps::before {
-    content: '';
-    position: absolute; top: 28px; left: 80px; right: 80px;
-    height: 1px; background: rgba(200,148,42,0.25);
-  }
-  .process-step { text-align: center; }
-  .step-circle {
-    width: 56px; height: 56px; border-radius: 50%;
-    background: var(--warm-white); border: 1px solid rgba(200,148,42,0.4);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--serif); font-size: 22px; font-weight: 300; color: var(--gold);
-    margin: 0 auto 28px; position: relative; z-index: 1;
-    transition: background 0.3s, border-color 0.3s;
-  }
-  .process-step:hover .step-circle { background: var(--gold); color: #fff; border-color: var(--gold); }
-  .step-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--charcoal); margin-bottom: 10px; }
-  .step-desc { font-size: 13.5px; line-height: 1.65; color: var(--muted); font-weight: 300; }
+/* TESTIMONIALS */
+.testi-section{background:var(--gold-pale);border-top:1px solid rgba(184,132,30,.15);border-bottom:1px solid rgba(184,132,30,.15);padding:100px 40px}
+.testi-inner{max-width:1280px;margin:0 auto}
+.testi-header{margin-bottom:60px}
+.testi-header .eyebrow{margin-bottom:16px}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.testi-card{background:var(--white);border-radius:var(--r-xl);padding:36px;border:1px solid var(--border);box-shadow:var(--sh-xs);transition:transform .3s var(--ease),box-shadow .3s}
+.testi-card:hover{transform:translateY(-4px);box-shadow:var(--sh-md)}
+.testi-stars{color:var(--gold-rich);font-size:15px;letter-spacing:2px;margin-bottom:20px}
+.testi-quote{font-family:var(--serif);font-size:18px;font-style:italic;font-weight:400;color:var(--ink);line-height:1.6;margin-bottom:28px}
+.testi-author{display:flex;align-items:center;gap:14px}
+.testi-avatar{width:42px;height:42px;border-radius:50%;background:var(--sage-light);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;color:var(--sage);font-family:var(--serif);flex-shrink:0}
+.testi-name{font-size:14px;font-weight:600;color:var(--ink)}
+.testi-role{font-size:12px;color:var(--ink-50);margin-top:2px}
 
-  /* ── NEWSLETTER ── */
-  .newsletter {
-    background: var(--gold-pale);
-    border-top: 1px solid rgba(200,148,42,0.2);
-    border-bottom: 1px solid rgba(200,148,42,0.2);
-    padding: 90px 60px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-  }
-  .nl-title { font-family: var(--serif); font-size: 44px; font-weight: 300; color: var(--charcoal); line-height: 1.1; margin-bottom: 14px; }
-  .nl-title em { font-style: italic; color: var(--moss); }
-  .nl-sub { font-size: 15px; color: var(--muted); font-weight: 300; line-height: 1.7; }
-  .nl-form { display: flex; flex-direction: column; gap: 16px; }
-  .nl-form label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
-  .nl-input-row { display: flex; }
-  .nl-input {
-    flex: 1; padding: 15px 20px;
-    border: 1px solid rgba(0,0,0,0.15); border-right: none;
-    font-family: var(--sans); font-size: 14px; background: #fff;
-    border-radius: 2px 0 0 2px; color: var(--charcoal); outline: none;
-    transition: border-color 0.2s;
-  }
-  .nl-input:focus { border-color: var(--gold); }
-  .nl-btn {
-    background: var(--forest); color: #F5EDD8;
-    padding: 15px 32px; border: none; cursor: pointer;
-    font-family: var(--sans); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
-    border-radius: 0 2px 2px 0; font-weight: 500; transition: background 0.2s;
-    white-space: nowrap;
-  }
-  .nl-btn:hover { background: var(--forest-mid); }
-  .nl-perks { display: flex; gap: 24px; margin-top: 16px; }
-  .nl-perk { font-size: 12px; color: var(--muted); font-weight: 300; display: flex; align-items: center; gap: 6px; }
-  .nl-perk::before { content: '✓'; color: var(--moss); font-weight: 500; }
+/* NEWSLETTER */
+.newsletter-section{padding:100px 40px;background:var(--white)}
+.nl-inner{max-width:1100px;margin:0 auto;background:var(--sage);border-radius:var(--r-xl);padding:72px 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;overflow:hidden}
+.nl-inner::before{content:'';position:absolute;top:-120px;right:-120px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(184,132,30,.2) 0%,transparent 70%)}
+.nl-eyebrow{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.42);display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.nl-eyebrow::before{content:'';width:20px;height:1.5px;background:var(--gold-rich);border-radius:2px}
+.nl-title{font-family:var(--serif);font-size:clamp(26px,3vw,40px);font-weight:400;color:#FEFDFB;line-height:1.1;margin-bottom:16px;letter-spacing:-.02em}
+.nl-title em{font-style:italic;color:var(--gold-rich)}
+.nl-sub{font-size:15px;color:rgba(255,255,255,.48);line-height:1.7}
+.nl-form-side{position:relative;z-index:1}
+.nl-label{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);display:block;margin-bottom:12px}
+.nl-wrap{display:flex;background:var(--white);border-radius:var(--r-full);overflow:hidden;box-shadow:var(--sh-md)}
+.nl-input{flex:1;padding:15px 22px;font-family:var(--sans);font-size:14px;color:var(--ink);background:transparent;border:none;outline:none}
+.nl-input::placeholder{color:var(--ink-50)}
+.nl-submit{font-size:13px;font-weight:600;background:var(--ink);color:var(--white);padding:12px 24px;border:none;cursor:pointer;border-radius:var(--r-full);margin:5px;transition:background .2s;font-family:var(--sans)}
+.nl-submit:hover{background:var(--gold-rich)}
+.nl-perks{display:flex;gap:20px;margin-top:18px;flex-wrap:wrap}
+.nl-perk{font-size:12px;color:rgba(255,255,255,.42);display:flex;align-items:center;gap:6px}
+.nl-perk::before{content:'✓';color:var(--gold-rich);font-weight:700}
 
-  /* ── FOOTER ── */
-  footer { background: var(--charcoal); padding: 80px 60px 40px; }
-  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
-  .footer-brand .logo { display: block; margin-bottom: 20px; }
-  .footer-tagline { font-size: 14px; color: rgba(245,237,216,0.35); line-height: 1.7; font-weight: 300; max-width: 260px; }
-  .footer-col-title { font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(245,237,216,0.5); margin-bottom: 20px; font-weight: 500; }
-  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .footer-links a { font-size: 14px; color: rgba(245,237,216,0.35); text-decoration: none; font-weight: 300; transition: color 0.2s; }
-  .footer-links a:hover { color: rgba(245,237,216,0.75); }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; }
-  .footer-copy { font-size: 12px; color: rgba(245,237,216,0.25); font-weight: 300; }
-  .footer-legal { display: flex; gap: 24px; }
-  .footer-legal a { font-size: 12px; color: rgba(245,237,216,0.25); text-decoration: none; transition: color 0.2s; }
-  .footer-legal a:hover { color: rgba(245,237,216,0.5); }
+/* FOOTER */
+footer{background:var(--ink);color:var(--white);padding:80px 40px 36px}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:36px}
+.footer-logo{font-family:var(--serif);font-size:24px;font-weight:500;color:var(--white);margin-bottom:14px;display:block;letter-spacing:-.01em}
+.footer-logo .dot{color:var(--gold-rich)}
+.footer-tagline{font-size:14px;color:rgba(255,255,255,.32);line-height:1.7;max-width:260px;font-weight:300;margin-bottom:28px}
+.footer-social{display:flex;gap:10px}
+.footer-social a{width:36px;height:36px;border-radius:var(--r-sm);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:15px;transition:background .2s}
+.footer-social a:hover{background:rgba(255,255,255,.12)}
+.footer-col-title{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:20px}
+.footer-col ul{display:flex;flex-direction:column;gap:11px}
+.footer-col a{font-size:14px;color:rgba(255,255,255,.38);font-weight:300;transition:color .2s}
+.footer-col a:hover{color:rgba(255,255,255,.8)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-copy{font-size:13px;color:rgba(255,255,255,.22);font-weight:300}
+.footer-legal{display:flex;gap:24px}
+.footer-legal a{font-size:13px;color:rgba(255,255,255,.22);transition:color .2s}
+.footer-legal a:hover{color:rgba(255,255,255,.5)}
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* BACK TOP */
+.back-top{position:fixed;bottom:28px;right:28px;z-index:500;width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:var(--sh-md);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;cursor:pointer;border:none}
+.back-top.show{opacity:1;pointer-events:auto}
+.back-top:hover{transform:translateY(-3px);background:var(--sage)}
 
-  .reveal {
-    opacity: 0; transform: translateY(32px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
+/* ANIMATIONS */
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes floatUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes heroIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-left>*{animation:heroIn .9s var(--ease) both}
+.hero-eyebrow{animation-delay:.1s}.hero-h1{animation-delay:.2s}.hero-p{animation-delay:.3s}.hero-btns{animation-delay:.4s}.hero-stats{animation-delay:.5s}
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 1024px) {
-    .hero, .philosophy, .full-feature, .newsletter { grid-template-columns: 1fr; }
-    .hero-right { min-height: 400px; }
-    .products-grid, .ingredients-grid { grid-template-columns: repeat(2,1fr); }
-    .gallery-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: auto; }
-    .gallery-item.tall, .gallery-item.wide { grid-row: span 1; grid-column: span 1; }
-    .footer-top { grid-template-columns: 1fr 1fr; }
-    nav { padding: 0 24px; }
-    .hero-left, .philosophy { padding: 60px 24px; }
-    .products-section, .gallery-section, .ingredients-section,
-    .drinks-section, .testimonial-section, .process-section,
-    .newsletter, footer { padding: 80px 24px; }
-  }
-  @media (max-width: 680px) {
-    .hero-title { font-size: 48px; }
-    .section-title { font-size: 36px; }
-    .products-grid, .ingredients-grid, .testimonials-wrap,
-    .process-steps, .drinks-grid { grid-template-columns: 1fr; }
-    .drinks-grid .drink-card { min-height: 320px; }
-    .cat-grid, .footer-top { grid-template-columns: 1fr 1fr; }
-    .nav-links { display: none; }
-    .stat-row { flex-direction: column; gap: 24px; }
-    .phil-img-quote { display: none; }
-    .process-steps::before { display: none; }
-  }
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:80px 40px;min-height:70vh}
+  .hero-right{height:460px}
+  .philosophy{grid-template-columns:1fr;padding:80px 40px}
+  .phil-img-main{height:420px}
+  .phil-img-inset,.phil-badge{display:none}
+  .phil-content{padding-right:0}
+  .featured-split{grid-template-columns:1fr}
+  .feat-img{height:400px}
+  .products-grid{grid-template-columns:repeat(2,1fr)}
+  .ingredients-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .nl-inner{grid-template-columns:1fr;padding:52px 40px}
+}
+@media(max-width:768px){
+  #nav{padding:0 20px}
+  .nav-links,.nav-shop{display:none}
+  .nav-burger{display:flex}
+  .hero-left{padding:60px 24px}
+  .hero-stats{gap:24px}
+  .trust-bar{flex-direction:column;padding:0}
+  .trust-item{border-right:none;border-bottom:1px solid var(--border);padding:18px 24px;width:100%}
+  .trust-item:last-child{border-bottom:none}
+  .philosophy,.products-section,.gallery-section,.ingredients-section,.drinks-section,.process-section,.testi-section,.newsletter-section{padding:72px 20px}
+  .products-grid,.testi-grid,.process-steps{grid-template-columns:1fr}
+  .process-steps::before{display:none}
+  .drinks-grid{grid-template-columns:1fr}
+  .drink-card{min-height:340px}
+  .ingredients-grid{grid-template-columns:1fr 1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px 200px}
+  .g-item.g-tall{grid-row:span 1}
+  .g-item.g-wide{grid-column:span 2}
+  .sec-header,.ing-header{flex-direction:column;align-items:flex-start;gap:14px}
+  .footer-top{grid-template-columns:1fr 1fr;gap:36px}
+  .nl-inner{padding:40px 24px}
+  .nl-wrap{flex-direction:column;border-radius:var(--r-lg)}
+  .nl-submit{margin:4px;border-radius:var(--r-md)}
+  .hero-right{height:320px}
+}
+@media(max-width:480px){
+  .hero-btns{flex-direction:column}
+  .hero-btns .btn{justify-content:center}
+  .products-grid,.ingredients-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+  .feat-content{padding:48px 28px}
+}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
-  <a href="#" class="logo">terra<em>nourish</em></a>
+<nav id="nav">
+  <a href="#" class="nav-logo">Terra<span class="dot">·</span>nourish</a>
   <ul class="nav-links">
     <li><a href="#products">Products</a></li>
     <li><a href="#ingredients">Ingredients</a></li>
     <li><a href="#drinks">Drinks</a></li>
-    <li><a href="#story">Our story</a></li>
+    <li><a href="#story">Our Story</a></li>
     <li><a href="#journal">Journal</a></li>
   </ul>
-  <a href="#products" class="nav-cta">Shop now</a>
+  <div class="nav-right">
+    <a href="#products" class="nav-shop">Shop Now</a>
+    <div class="nav-burger" id="burger" aria-label="Toggle menu" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="drawer">
+  <a href="#products" onclick="closeMenu()">Products</a>
+  <a href="#ingredients" onclick="closeMenu()">Ingredients</a>
+  <a href="#drinks" onclick="closeMenu()">Drinks</a>
+  <a href="#story" onclick="closeMenu()">Our Story</a>
+  <a href="#journal" onclick="closeMenu()">Journal</a>
+  <a href="#products" class="dcta btn" onclick="closeMenu()">Shop Now</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="eyebrow">Ancient wisdom · Modern nourishment</div>
-    <h1 class="hero-title">Nourish from<br>the <em>root</em><br>outward</h1>
-    <p class="hero-sub">Whole-food supplements, cold-pressed oils, and spice blends crafted for people who treat eating as a daily ritual.</p>
+    <div class="hero-eyebrow">Ancient wisdom · Modern nourishment</div>
+    <h1 class="hero-h1">Nourish from<br>the <em>root</em> outward</h1>
+    <p class="hero-p">Whole-food supplements, cold-pressed oils, and spice blends crafted for people who treat eating as a daily ritual.</p>
     <div class="hero-btns">
-      <a href="#products" class="btn-primary">Explore products</a>
-      <a href="#story" class="btn-ghost">Our story</a>
+      <a href="#products" class="btn btn-white">Explore Products <span class="arrow">→</span></a>
+      <a href="#story" class="btn btn-ghost">Our Story</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">47<sup>+</sup></div><div class="stat-label">Partner farms</div></div>
+      <div><div class="stat-num">100<sup>%</sup></div><div class="stat-label">Certified organic</div></div>
+      <div><div class="stat-num">12<sup>+</sup></div><div class="stat-label">Years sourcing</div></div>
     </div>
   </div>
   <div class="hero-right">
-    <img src="olive-oil.jpeg" alt="Cold-pressed olive oil with fresh olives" style="object-position: center center;">
-    <div class="hero-right-overlay"></div>
-    <div class="hero-badge">
-      <div class="hero-badge-num">12<em>+</em></div>
-      <div class="hero-badge-label">Years of sourcing</div>
+    <img src="olive-oil.jpeg" alt="Cold-pressed olive oil with fresh olives and branches">
+    <div class="hero-pill">
+      <div class="pill-icon">🌿</div>
+      <div>
+        <div class="pill-text">Zero synthetic additives</div>
+        <div class="pill-sub">Every batch lab-verified</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-bar" aria-hidden="true">
-  <div class="marquee-track">
-    <span class="marquee-item">Cold-pressed oils <span class="marquee-dot">◆</span></span>
-    <span class="marquee-item">Organic spice blends <span class="marquee-dot">◆</span></span>
-    <span class="marquee-item">Wild-harvested herbs <span class="marquee-dot">◆</span></span>
-    <span class="marquee-item">Adaptogenic gummies <span class="marquee-dot">◆</span></span>
-    <span class="marquee-item">Single-origin turmeric <span class="marquee-dot">◆</span></span>
-    <span class="marquee-item">Ceremonial chai blends <span class="marquee-dot">◆</span></span>
-    <span class="marquee-item">Zero-waste packaging <span class="marquee-dot">◆</span></span>
-    <span class="marquee-item">Third-party tested <span class="marquee-dot">◆</span></span>
-    <!-- Duplicate for seamless loop -->
-    <span class="marquee-item">Cold-pressed oils <span class="marquee-dot">◆</span></span>
-    <span class="marquee-item">Organic spice blends <span class="marquee-dot">◆</span></span>
-    <span class="marquee-item">Wild-harvested herbs <span class="marquee-dot">◆</span></span>
-    <span class="marquee-item">Adaptogenic gummies <span class="marquee-dot">◆</span></span>
-    <span class="marquee-item">Single-origin turmeric <span class="marquee-dot">◆</span></span>
-    <span class="marquee-item">Ceremonial chai blends <span class="marquee-dot">◆</span></span>
-    <span class="marquee-item">Zero-waste packaging <span class="marquee-dot">◆</span></span>
-    <span class="marquee-item">Third-party tested <span class="marquee-dot">◆</span></span>
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">Cold-pressed oils</span><span class="ticker-item">Organic spice blends</span><span class="ticker-item">Wild-harvested herbs</span><span class="ticker-item">Adaptogenic gummies</span><span class="ticker-item">Single-origin turmeric</span><span class="ticker-item">Ceremonial chai blends</span><span class="ticker-item">Zero-waste packaging</span><span class="ticker-item">Third-party tested</span><span class="ticker-item">Cold-pressed oils</span><span class="ticker-item">Organic spice blends</span><span class="ticker-item">Wild-harvested herbs</span><span class="ticker-item">Adaptogenic gummies</span><span class="ticker-item">Single-origin turmeric</span><span class="ticker-item">Ceremonial chai blends</span><span class="ticker-item">Zero-waste packaging</span><span class="ticker-item">Third-party tested</span>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <div class="trust-icon">🌱</div>
+    <div><div class="trust-title">USDA Certified Organic</div><div class="trust-sub">Every ingredient, every batch</div></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">🔬</div>
+    <div><div class="trust-title">Third-Party Lab Tested</div><div class="trust-sub">Independent purity verification</div></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">♻️</div>
+    <div><div class="trust-title">Zero-Waste Packaging</div><div class="trust-sub">Glass, paper, compostable only</div></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">🤝</div>
+    <div><div class="trust-title">Fair-Trade Sourced</div><div class="trust-sub">Premium paid to every grower</div></div>
   </div>
 </div>
 
 <!-- PHILOSOPHY -->
-<section class="philosophy" id="story">
-  <div class="phil-img-wrap reveal">
-    <div class="phil-img-accent"></div>
-    <img src="broccoli-dish.jpeg" alt="Clean plant-based food on ceramic plate" style="object-position: center 30%;">
-    <div class="phil-img-quote">
-      <p>"Every ingredient tells a story of soil, sun, and careful hands."</p>
+<section id="story" style="background:var(--white)">
+  <div class="philosophy">
+    <div class="phil-media reveal">
+      <img class="phil-img-main" src="broccoli-dish.jpeg" alt="Elegantly plated plant-based dish">
+      <img class="phil-img-inset" src="gummies.jpeg" alt="Premium supplement gummies" style="object-position:center center">
+      <div class="phil-badge">
+        <div class="phil-badge-num">★ 4.9</div>
+        <div class="phil-badge-label">28,000+ reviews</div>
+      </div>
     </div>
-  </div>
-  <div class="phil-content reveal reveal-delay-2">
-    <div class="section-eyebrow">Our philosophy</div>
-    <h2 class="section-title">Food as <em>medicine,</em><br>eating as ritual</h2>
-    <p class="section-body">We believe the most profound nourishment comes from whole foods in their most natural form — unrefined, unprocessed, and alive with the intelligence nature built in over millennia. Every product we make begins with a single question: does this honour the ingredient?</p>
-    <p class="section-body">Our sourcing team travels to the farms, meets the growers, and selects only what passes the most rigorous standards of purity and potency. No shortcuts. No compromises.</p>
-    <div class="stat-row">
-      <div class="stat"><div class="stat-num">47<em>+</em></div><div class="stat-label">Partner farms worldwide</div></div>
-      <div class="stat"><div class="stat-num">100<em>%</em></div><div class="stat-label">Certified organic</div></div>
-      <div class="stat"><div class="stat-num">0</div><div class="stat-label">Synthetic additives</div></div>
+    <div class="phil-content">
+      <div class="eyebrow reveal">Our philosophy</div>
+      <h2 class="section-title reveal d1">Food as <em>medicine,</em><br>eating as ritual</h2>
+      <p class="section-body reveal d2">We believe the most profound nourishment comes from whole foods in their most natural form — unrefined, unprocessed, and alive with the intelligence nature built in over millennia.</p>
+      <div class="phil-list reveal d3">
+        <div class="phil-item">
+          <div class="phil-item-icon">🫒</div>
+          <div><div class="phil-item-title">Single-origin sourcing</div><div class="phil-item-desc">Every ingredient traced to its farm. We know the grower's name.</div></div>
+        </div>
+        <div class="phil-item">
+          <div class="phil-item-icon">❄️</div>
+          <div><div class="phil-item-title">Cold-processed always</div><div class="phil-item-desc">Heat destroys what nature built. Never above 42°C. No exceptions.</div></div>
+        </div>
+        <div class="phil-item">
+          <div class="phil-item-icon">📋</div>
+          <div><div class="phil-item-title">Transparent lab results</div><div class="phil-item-desc">Every batch result published publicly. Nothing to hide.</div></div>
+        </div>
+      </div>
+      <a href="#products" class="btn btn-primary reveal d4">Shop the Collection <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
 
 <!-- PRODUCTS -->
 <section class="products-section" id="products">
-  <div class="section-header reveal">
+  <div class="sec-header reveal">
     <div>
-      <div class="section-eyebrow">Our collection</div>
-      <h2 class="section-title">Daily <em>rituals</em></h2>
+      <div class="eyebrow">Our collection</div>
+      <h2 class="section-title" style="margin-top:16px">Daily <em>rituals</em></h2>
     </div>
-    <a href="#" class="view-all">View all products</a>
+    <a href="#" class="view-all">View all products →</a>
   </div>
   <div class="products-grid">
     <div class="product-card reveal">
-      <div class="product-img">
-        <img src="gummies.jpeg" alt="Jellybee nutrition gummies — turmeric and collagen" style="object-position: center center;">
-        <span class="product-badge">Bestseller</span>
+      <div class="product-img-wrap">
+        <img src="gummies.jpeg" alt="Turmeric and Ginger Gummies" style="object-position:center center">
+        <span class="product-badge badge-gold">Bestseller</span>
       </div>
       <div class="product-body">
-        <div class="product-category">Supplement gummies</div>
+        <div class="product-cat">Supplement gummies</div>
         <div class="product-name">Turmeric & Ginger Gummies</div>
-        <p class="product-desc">Orange-flavour gummies with 500mg curcumin, black pepper extract for absorption, and fresh-pressed ginger. Anti-inflammatory support made delicious.</p>
+        <p class="product-desc">500mg curcumin with black pepper for absorption. Anti-inflammatory support made genuinely delicious.</p>
         <div class="product-footer">
-          <div class="price">$34 <small>60 gummies · 30 servings</small></div>
-          <button class="add-btn">Add to cart</button>
+          <div><div class="product-price">$34</div><div class="product-price-sub">60 gummies · 30 servings</div></div>
+          <button class="cart-btn" onclick="addCart(this)">Add to Cart +</button>
         </div>
       </div>
     </div>
-    <div class="product-card reveal reveal-delay-1">
-      <div class="product-img">
-        <img src="turmeric-powder.jpeg" alt="Pure turmeric powder in glass jar" style="object-position: center 40%;">
-        <span class="product-badge">New harvest</span>
+    <div class="product-card reveal d1">
+      <div class="product-img-wrap">
+        <img src="turmeric-powder.jpeg" alt="Reserve grade turmeric powder" style="object-position:center 40%">
+        <span class="product-badge badge-sage">New harvest</span>
       </div>
       <div class="product-body">
-        <div class="product-category">Single-origin spice</div>
+        <div class="product-cat">Single-origin spice</div>
         <div class="product-name">Reserve Turmeric Powder</div>
-        <p class="product-desc">Cold-stone ground from hand-selected Kerala rhizomes. 5.8% curcuminoid content — two to three times higher than commercial grade turmeric.</p>
+        <p class="product-desc">Cold-stone ground Kerala rhizomes. 5.8% curcuminoids — three times higher than commercial grade.</p>
         <div class="product-footer">
-          <div class="price">$28 <small>120g · lab-tested batch</small></div>
-          <button class="add-btn">Add to cart</button>
+          <div><div class="product-price">$28</div><div class="product-price-sub">120g · lab-tested batch</div></div>
+          <button class="cart-btn" onclick="addCart(this)">Add to Cart +</button>
         </div>
       </div>
     </div>
-    <div class="product-card reveal reveal-delay-2">
-      <div class="product-img">
-        <img src="golden-milk.jpeg" alt="Golden milk turmeric latte on rustic wood" style="object-position: center 35%;">
+    <div class="product-card reveal d2">
+      <div class="product-img-wrap">
+        <img src="golden-milk.jpeg" alt="Golden Milk turmeric latte blend" style="object-position:center 30%">
         <span class="product-badge">Fan favourite</span>
       </div>
       <div class="product-body">
-        <div class="product-category">Ritual drink blend</div>
+        <div class="product-cat">Ritual drink blend</div>
         <div class="product-name">Golden Milk Blend</div>
-        <p class="product-desc">Seven spices, one perfect morning. Turmeric, ginger, cinnamon, cardamom, ashwagandha, black pepper, and vanilla. Just add warm oat milk.</p>
+        <p class="product-desc">Seven spices in one perfect morning cup. Turmeric, ginger, cinnamon, cardamom, ashwagandha. Just add oat milk.</p>
         <div class="product-footer">
-          <div class="price">$42 <small>200g · 40 servings</small></div>
-          <button class="add-btn">Add to cart</button>
+          <div><div class="product-price">$42</div><div class="product-price-sub">200g · 40 servings</div></div>
+          <button class="cart-btn" onclick="addCart(this)">Add to Cart +</button>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FULL FEATURE — Chai -->
-<section class="full-feature" id="chai-feature">
-  <div class="ff-img">
-    <img src="chai-spice.jpeg" alt="Handcrafted chai spice blend in glass jar with candle" style="object-position: center 40%;">
+<!-- FEATURED SPLIT -->
+<div class="featured-split">
+  <div class="feat-img">
+    <img src="chai-spice.jpeg" alt="Ceremonial chai masala in glass jar" style="object-position:center 35%">
   </div>
-  <div class="ff-content">
-    <div class="ff-eyebrow">— Featured blend</div>
-    <h2 class="ff-title">Ceremonial<br><em>Chai Masala</em></h2>
-    <p class="ff-body">Hand-blended in small batches from seven single-origin spices. This is not a flavouring — it's a full-body sensory experience rooted in 3,000 years of Ayurvedic tradition. Warm. Grounding. Unforgettable.</p>
-    <div class="ff-ingredients">
-      <span class="ff-tag">Ceylon cinnamon</span>
-      <span class="ff-tag">Green cardamom</span>
-      <span class="ff-tag">Long pepper</span>
-      <span class="ff-tag">Star anise</span>
-      <span class="ff-tag">Clove bud</span>
-      <span class="ff-tag">Dry ginger</span>
-      <span class="ff-tag">Fennel seed</span>
+  <div class="feat-content">
+    <div class="feat-eyebrow">Featured blend</div>
+    <h2 class="feat-title">Ceremonial<br><em>Chai Masala</em></h2>
+    <p class="feat-body">Hand-blended in small batches from seven single-origin spices. Rooted in 3,000 years of Ayurvedic tradition. Warm. Grounding. Unforgettable.</p>
+    <div class="feat-tags">
+      <span class="feat-tag">Ceylon cinnamon</span><span class="feat-tag">Green cardamom</span><span class="feat-tag">Long pepper</span><span class="feat-tag">Star anise</span><span class="feat-tag">Clove bud</span><span class="feat-tag">Dry ginger</span><span class="feat-tag">Fennel seed</span>
     </div>
-    <a href="#" class="btn-primary">Shop the blend — $36</a>
+    <a href="#" class="btn btn-gold">Shop the Blend — $36 <span class="arrow">→</span></a>
   </div>
-</section>
+</div>
 
 <!-- GALLERY -->
 <section class="gallery-section">
-  <div class="section-eyebrow reveal">Ritual gallery</div>
-  <h2 class="section-title reveal reveal-delay-1">Eat with your <em>eyes</em> first</h2>
-  <div class="gallery-grid">
-    <div class="gallery-item tall">
-      <img src="berry-smoothie.jpeg" alt="Berry smoothie with fresh fruit" style="object-position: center 30%;">
-      <div class="gallery-caption"><p>Wild berry adaptogen smoothie</p></div>
+  <div class="sec-header reveal" style="max-width:none;margin-left:0;margin-right:0">
+    <div>
+      <div class="eyebrow">Ritual gallery</div>
+      <h2 class="section-title" style="margin-top:16px">Eat with your <em>eyes</em> first</h2>
     </div>
-    <div class="gallery-item">
-      <img src="overnight-oats.jpeg" alt="Overnight oats with nut butter and chocolate" style="object-position: center 50%;">
-      <div class="gallery-caption"><p>Peanut butter overnight oats</p></div>
+  </div>
+  <div class="gallery-grid reveal d1">
+    <div class="g-item g-tall">
+      <img src="berry-smoothie.jpeg" alt="Wild berry adaptogen smoothie" style="object-position:center 25%">
+      <div class="g-cap"><p>Wild berry adaptogen smoothie</p></div>
     </div>
-    <div class="gallery-item">
-      <img src="banana-smoothie.jpeg" alt="Banana smoothie with mint garnish" style="object-position: center 20%;">
-      <div class="gallery-caption"><p>Banana protein smoothie</p></div>
+    <div class="g-item">
+      <img src="overnight-oats.jpeg" alt="Peanut butter overnight oats" style="object-position:center 45%">
+      <div class="g-cap"><p>Peanut butter overnight oats</p></div>
     </div>
-    <div class="gallery-item wide">
-      <img src="iced-coffee.jpeg" alt="Iced coffee splash with coffee beans" style="object-position: center 30%;">
-      <div class="gallery-caption"><p>Cold-brew coffee ritual</p></div>
+    <div class="g-item">
+      <img src="banana-smoothie.jpeg" alt="Banana protein smoothie" style="object-position:center 20%">
+      <div class="g-cap"><p>Banana protein smoothie</p></div>
     </div>
-    <div class="gallery-item">
-      <img src="olive-oil.jpeg" alt="Olive oil with fresh olives">
-      <div class="gallery-caption"><p>First cold press, stone ground</p></div>
+    <div class="g-item g-wide">
+      <img src="iced-coffee.jpeg" alt="Cold-brew coffee ritual" style="object-position:center 35%">
+      <div class="g-cap"><p>Cold-brew coffee ritual</p></div>
     </div>
   </div>
 </section>
 
 <!-- INGREDIENTS -->
 <section class="ingredients-section" id="ingredients">
-  <div class="section-eyebrow reveal">What's inside</div>
-  <h2 class="section-title reveal reveal-delay-1">Ingredients with<br><em>provenance</em></h2>
+  <div class="ing-header reveal">
+    <div>
+      <div class="eyebrow">What's inside</div>
+      <h2 class="section-title" style="margin-top:16px">Ingredients with <em>provenance</em></h2>
+    </div>
+    <a href="#" class="btn btn-ghost" style="border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.6)">Full library →</a>
+  </div>
   <div class="ingredients-grid">
-    <div class="ingredient-card reveal">
-      <div class="ingredient-img">
-        <img src="turmeric-powder.jpeg" alt="Turmeric powder" style="object-position: center 40%;">
-      </div>
-      <div class="ingredient-body">
-        <div class="ingredient-name"><em>Curcuma longa</em></div>
-        <div class="ingredient-desc">Kerala single-origin, cold-stone ground. 5.8% curcuminoids verified by third-party HPLC testing.</div>
-        <span class="ingredient-benefit">Anti-inflammatory</span>
+    <div class="ing-card reveal">
+      <div class="ing-img"><img src="turmeric-powder.jpeg" alt="Kerala turmeric" style="object-position:center 40%"></div>
+      <div class="ing-body">
+        <div class="ing-latin">Curcuma longa</div><div class="ing-name">Kerala Turmeric</div>
+        <div class="ing-desc">Cold-stone ground. 5.8% curcuminoids by HPLC. Single-family farm sourced.</div>
+        <span class="ing-benefit">Anti-inflammatory</span>
       </div>
     </div>
-    <div class="ingredient-card reveal reveal-delay-1">
-      <div class="ingredient-img">
-        <img src="olive-oil.jpeg" alt="Olive oil" style="object-position: center center;">
-      </div>
-      <div class="ingredient-body">
-        <div class="ingredient-name"><em>Olea europaea</em></div>
-        <div class="ingredient-desc">First cold-press, harvested at peak polyphenol content. Acidity below 0.2%. Estate-bottled, not blended.</div>
-        <span class="ingredient-benefit">Cardiovascular</span>
+    <div class="ing-card reveal d1">
+      <div class="ing-img"><img src="olive-oil.jpeg" alt="Estate olive oil" style="object-position:center center"></div>
+      <div class="ing-body">
+        <div class="ing-latin">Olea europaea</div><div class="ing-name">Estate Olive Oil</div>
+        <div class="ing-desc">First cold-press at peak polyphenol harvest. Acidity below 0.2%. Never blended.</div>
+        <span class="ing-benefit">Cardiovascular</span>
       </div>
     </div>
-    <div class="ingredient-card reveal reveal-delay-2">
-      <div class="ingredient-img">
-        <img src="chai-spice.jpeg" alt="Chai spices" style="object-position: center 40%;">
-      </div>
-      <div class="ingredient-body">
-        <div class="ingredient-name"><em>Cinnamomum verum</em></div>
-        <div class="ingredient-desc">True Ceylon cinnamon from Sri Lankan highlands. Low coumarin, high cinnamaldehyde — the real thing.</div>
-        <span class="ingredient-benefit">Blood sugar balance</span>
+    <div class="ing-card reveal d2">
+      <div class="ing-img"><img src="chai-spice.jpeg" alt="Ceylon cinnamon" style="object-position:center 35%"></div>
+      <div class="ing-body">
+        <div class="ing-latin">Cinnamomum verum</div><div class="ing-name">Ceylon Cinnamon</div>
+        <div class="ing-desc">True Ceylon from Sri Lankan highlands. Low coumarin, high cinnamaldehyde.</div>
+        <span class="ing-benefit">Blood sugar balance</span>
       </div>
     </div>
-    <div class="ingredient-card reveal reveal-delay-3">
-      <div class="ingredient-img">
-        <img src="broccoli-dish.jpeg" alt="Broccoli microgreens" style="object-position: center 30%;">
-      </div>
-      <div class="ingredient-body">
-        <div class="ingredient-name"><em>Brassica oleracea</em></div>
-        <div class="ingredient-desc">Fresh-harvested broccoli microgreens, 100× the sulforaphane of mature heads. Freeze-dried within 2 hours.</div>
-        <span class="ingredient-benefit">Cellular detox</span>
+    <div class="ing-card reveal d3">
+      <div class="ing-img"><img src="broccoli-dish.jpeg" alt="Broccoli microgreens" style="object-position:center 25%"></div>
+      <div class="ing-body">
+        <div class="ing-latin">Brassica oleracea</div><div class="ing-name">Broccoli Microgreens</div>
+        <div class="ing-desc">100× sulforaphane of mature heads. Freeze-dried within 2 hours of harvest.</div>
+        <span class="ing-benefit">Cellular detox</span>
       </div>
     </div>
   </div>
@@ -697,206 +613,215 @@
 
 <!-- DRINKS -->
 <section class="drinks-section" id="drinks">
-  <div class="section-header reveal">
+  <div class="sec-header reveal" style="max-width:1280px;margin-left:auto;margin-right:auto">
     <div>
-      <div class="section-eyebrow">Liquid wellness</div>
-      <h2 class="section-title">Drinks for every <em>ritual</em></h2>
+      <div class="eyebrow">Liquid wellness</div>
+      <h2 class="section-title" style="margin-top:16px">Drinks for every <em>ritual</em></h2>
     </div>
-    <a href="#" class="view-all">All drink blends</a>
+    <a href="#" class="view-all">All drink blends →</a>
   </div>
   <div class="drinks-grid">
     <div class="drink-card reveal">
-      <img src="turmeric-shots.jpeg" alt="Turmeric wellness shots" style="object-position: center 40%;">
+      <img src="turmeric-shots.jpeg" alt="Turmeric immunity shots" style="object-position:center 35%">
       <div class="drink-overlay"></div>
       <div class="drink-info">
-        <div class="drink-category">Morning shot</div>
-        <div class="drink-name">Turmeric <em>immunity shots</em></div>
+        <div class="drink-cat">Morning shot</div>
+        <div class="drink-name">Turmeric <em>Immunity Shots</em></div>
         <div class="drink-note">Ginger · turmeric · black pepper · lemon</div>
+        <a href="#" class="drink-cta">Shop now →</a>
       </div>
     </div>
-    <div class="drink-card reveal reveal-delay-1">
-      <img src="grape-drink.jpeg" alt="Deep grape and lemon wellness drink" style="object-position: center 30%;">
+    <div class="drink-card reveal d1">
+      <img src="grape-drink.jpeg" alt="Wild grape elixir" style="object-position:center 25%">
       <div class="drink-overlay"></div>
       <div class="drink-info">
-        <div class="drink-category">Antioxidant blend</div>
-        <div class="drink-name">Wild grape <em>elixir</em></div>
+        <div class="drink-cat">Antioxidant blend</div>
+        <div class="drink-name">Wild Grape <em>Elixir</em></div>
         <div class="drink-note">Concord grape · lemon · chicory root</div>
+        <a href="#" class="drink-cta">Shop now →</a>
       </div>
     </div>
-    <div class="drink-card reveal reveal-delay-2">
-      <img src="lemon-mint.jpeg" alt="Lemon mint cooler cocktail" style="object-position: center 25%;">
+    <div class="drink-card reveal d2">
+      <img src="lemon-mint.jpeg" alt="Lemon mint cooler" style="object-position:center 20%">
       <div class="drink-overlay"></div>
       <div class="drink-info">
-        <div class="drink-category">Afternoon cooler</div>
-        <div class="drink-name">Lemon <em>& mint</em> cooler</div>
+        <div class="drink-cat">Afternoon cooler</div>
+        <div class="drink-name">Lemon <em>& Mint</em> Cooler</div>
         <div class="drink-note">Lemon · spearmint · sea salt · ginger ale</div>
+        <a href="#" class="drink-cta">Shop now →</a>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonial-section">
-  <div class="section-eyebrow reveal" style="color:rgba(245,237,216,0.5);">— what people say</div>
-  <h2 class="section-title reveal reveal-delay-1" style="color:#F5EDD8;">Real results, <em>real people</em></h2>
-  <div class="testimonials-wrap">
-    <div class="testi-card reveal">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-quote">"The golden milk blend has become my non-negotiable morning ritual. My joints, my focus, my mood — all transformed. This isn't supplementation, it's nourishment."</p>
-      <div class="testi-author"><strong>Mara T.</strong> Registered nutritionist · Boulder, CO</div>
-    </div>
-    <div class="testi-card reveal reveal-delay-1">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-quote">"I've tried every turmeric supplement on the market. Nothing comes close to the potency or flavour of Terranourish's reserve powder. Worth every penny."</p>
-      <div class="testi-author"><strong>James K.</strong> Integrative medicine practitioner · London</div>
-    </div>
-    <div class="testi-card reveal reveal-delay-2">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-quote">"The chai masala smells like a spice market in the best way possible. I make a pot every Sunday and it sets the tone for the whole week. Extraordinary quality."</p>
-      <div class="testi-author"><strong>Priya S.</strong> Food writer · Mumbai / New York</div>
     </div>
   </div>
 </section>
 
 <!-- PROCESS -->
 <section class="process-section">
-  <div class="section-eyebrow reveal">How we do it</div>
-  <h2 class="section-title reveal reveal-delay-1">From <em>soil</em> to your shelf</h2>
-  <div class="process-steps">
-    <div class="process-step reveal">
-      <div class="step-circle">01</div>
-      <div class="step-title">Farm selection</div>
-      <p class="step-desc">Our team visits farms personally, evaluating soil health, farming practices, and the relationship between grower and land.</p>
+  <div class="process-inner">
+    <div class="process-header">
+      <div class="eyebrow reveal">How we do it</div>
+      <h2 class="section-title reveal d1" style="margin-top:16px">From <em>soil</em> to your shelf</h2>
     </div>
-    <div class="process-step reveal reveal-delay-1">
-      <div class="step-circle">02</div>
-      <div class="step-title">Harvest timing</div>
-      <p class="step-desc">Ingredients are harvested at peak nutritional density — not commercial convenience. We wait for nature's schedule.</p>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num-wrap"><div class="step-num">01</div></div>
+        <div class="step-title">Farm Selection</div>
+        <p class="step-desc">Our team visits personally, evaluating soil health and the relationship between grower and land before any agreement.</p>
+      </div>
+      <div class="process-step reveal d1">
+        <div class="step-num-wrap"><div class="step-num">02</div></div>
+        <div class="step-title">Harvest Timing</div>
+        <p class="step-desc">Ingredients are harvested at peak nutritional density — not commercial convenience. We wait for nature's schedule.</p>
+      </div>
+      <div class="process-step reveal d2">
+        <div class="step-num-wrap"><div class="step-num">03</div></div>
+        <div class="step-title">Cold Processing</div>
+        <p class="step-desc">Every product is cold-pressed, stone-ground, or freeze-dried. Never heated above 42°C. Heat destroys what nature built.</p>
+      </div>
+      <div class="process-step reveal d3">
+        <div class="step-num-wrap"><div class="step-num">04</div></div>
+        <div class="step-title">Lab Verification</div>
+        <p class="step-desc">Independent labs test every batch. Results are published publicly on our website before anything ships.</p>
+      </div>
     </div>
-    <div class="process-step reveal reveal-delay-2">
-      <div class="step-circle">03</div>
-      <div class="step-title">Cold processing</div>
-      <p class="step-desc">Heat destroys what nature built. Every product is cold-pressed, stone-ground, or freeze-dried — never heated above 42°C.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section">
+  <div class="testi-inner">
+    <div class="testi-header">
+      <div class="eyebrow reveal">Customer love</div>
+      <h2 class="section-title reveal d1" style="margin-top:16px">Real results, <em>real people</em></h2>
     </div>
-    <div class="process-step reveal reveal-delay-3">
-      <div class="step-circle">04</div>
-      <div class="step-title">Lab verification</div>
-      <p class="step-desc">Third-party labs test every batch for purity, potency, and the absence of contaminants before anything leaves our facility.</p>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"The golden milk blend has become my non-negotiable morning ritual. My joints, focus, and mood — all transformed. This is genuine nourishment."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">M</div>
+          <div><div class="testi-name">Mara T.</div><div class="testi-role">Registered Nutritionist · Boulder, CO</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal d1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Nothing comes close to the potency of the reserve turmeric powder. The transparency about sourcing and lab results is completely unmatched."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">J</div>
+          <div><div class="testi-name">James K.</div><div class="testi-role">Integrative Medicine Practitioner · London</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal d2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"The chai masala smells like a spice market in the very best way. I make a pot every Sunday and it sets the most beautiful tone for the week."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">P</div>
+          <div><div class="testi-name">Priya S.</div><div class="testi-role">Food Writer · Mumbai / New York</div></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- NEWSLETTER -->
-<section class="newsletter">
-  <div class="nl-text reveal">
-    <h2 class="nl-title">Seasonal <em>wisdom</em><br>in your inbox</h2>
-    <p class="nl-sub">Recipes rooted in tradition, new harvest announcements, and ritual guides from our network of farmers, chefs, and nutritionists. No noise. Only nourishment.</p>
-  </div>
-  <div class="nl-form reveal reveal-delay-1">
-    <label for="email-input">Join 28,000 conscious eaters</label>
-    <div class="nl-input-row">
-      <input class="nl-input" type="email" id="email-input" placeholder="your@email.com">
-      <button class="nl-btn">Subscribe</button>
+<section class="newsletter-section">
+  <div class="nl-inner reveal">
+    <div>
+      <div class="nl-eyebrow">Stay connected</div>
+      <h2 class="nl-title">Seasonal <em>wisdom</em><br>in your inbox</h2>
+      <p class="nl-sub">Recipes rooted in tradition, new harvest announcements, and ritual guides. No noise. Only nourishment.</p>
     </div>
-    <div class="nl-perks">
-      <span class="nl-perk">Free recipe guide on signup</span>
-      <span class="nl-perk">Unsubscribe anytime</span>
+    <div class="nl-form-side">
+      <label class="nl-label" for="nl-email">Join 28,000 conscious eaters</label>
+      <div class="nl-wrap">
+        <input class="nl-input" type="email" id="nl-email" placeholder="your@email.com" autocomplete="email">
+        <button class="nl-submit" id="nl-btn" onclick="subscribe()">Subscribe</button>
+      </div>
+      <div class="nl-perks">
+        <span class="nl-perk">Free recipe guide on signup</span>
+        <span class="nl-perk">Unsubscribe anytime</span>
+        <span class="nl-perk">No spam, ever</span>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <a href="#" class="logo">terra<em>nourish</em></a>
-      <p class="footer-tagline">Ancient ingredients for modern lives. Sourced with integrity, processed with care, delivered with transparency.</p>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <a href="#" class="footer-logo">Terra<span class="dot">·</span>nourish</a>
+        <p class="footer-tagline">Ancient ingredients for modern lives. Sourced with integrity, processed with care, delivered with full transparency.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">📸</a>
+          <a href="#" aria-label="Twitter">🐦</a>
+          <a href="#" aria-label="Pinterest">📌</a>
+          <a href="#" aria-label="YouTube">▶️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Shop</div>
+        <ul><li><a href="#">Oils & vinegars</a></li><li><a href="#">Spice blends</a></li><li><a href="#">Supplement gummies</a></li><li><a href="#">Ritual drinks</a></li><li><a href="#">Gift sets</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Learn</div>
+        <ul><li><a href="#">Our story</a></li><li><a href="#">Our farmers</a></li><li><a href="#">Ingredient library</a></li><li><a href="#">Recipes & rituals</a></li><li><a href="#">Lab results</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Support</div>
+        <ul><li><a href="#">Wholesale</a></li><li><a href="#">Subscriptions</a></li><li><a href="#">Returns</a></li><li><a href="#">Stockists</a></li><li><a href="#">Contact us</a></li></ul>
+      </div>
     </div>
-    <div>
-      <div class="footer-col-title">Shop</div>
-      <ul class="footer-links">
-        <li><a href="#">Oils & vinegars</a></li>
-        <li><a href="#">Spice blends</a></li>
-        <li><a href="#">Supplement gummies</a></li>
-        <li><a href="#">Ritual drinks</a></li>
-        <li><a href="#">Gift sets</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Learn</div>
-      <ul class="footer-links">
-        <li><a href="#">Our story</a></li>
-        <li><a href="#">Our farmers</a></li>
-        <li><a href="#">Ingredient library</a></li>
-        <li><a href="#">Recipes & rituals</a></li>
-        <li><a href="#">Lab results</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Support</div>
-      <ul class="footer-links">
-        <li><a href="#">Wholesale</a></li>
-        <li><a href="#">Subscriptions</a></li>
-        <li><a href="#">Returns</a></li>
-        <li><a href="#">Stockists</a></li>
-        <li><a href="#">Contact us</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 Terranourish. All rights reserved.</span>
-    <div class="footer-legal">
-      <a href="#">Privacy policy</a>
-      <a href="#">Terms of service</a>
-      <a href="#">Cookie settings</a>
-      <a href="#">Sustainability report</a>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Terranourish. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Settings</a><a href="#">Sustainability</a>
+      </div>
     </div>
   </div>
 </footer>
 
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
 <script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => io.observe(el));
+/* NAV scroll */
+const nav=document.getElementById('nav'),bt=document.getElementById('backTop');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>20);bt.classList.toggle('show',scrollY>400)},{passive:true});
 
-  // Nav background on scroll
-  const nav = document.querySelector('nav');
-  window.addEventListener('scroll', () => {
-    nav.style.background = window.scrollY > 60
-      ? 'rgba(17, 28, 17, 0.97)'
-      : 'rgba(17, 28, 17, 0.92)';
-  });
+/* Mobile menu */
+const burger=document.getElementById('burger'),drawer=document.getElementById('drawer');
+let open=false;
+function closeMenu(){open=false;drawer.classList.remove('open')}
+burger.addEventListener('click',()=>{open=!open;drawer.classList.toggle('open',open)});
+burger.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')burger.click()});
+document.addEventListener('click',e=>{if(open&&!drawer.contains(e.target)&&!burger.contains(e.target))closeMenu()});
 
-  // Add to cart feedback
-  document.querySelectorAll('.add-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const orig = this.textContent;
-      this.textContent = 'Added ✓';
-      this.style.background = '#3D5C35';
-      setTimeout(() => { this.textContent = orig; this.style.background = ''; }, 2000);
-    });
-  });
+/* Scroll reveal */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // Newsletter submit
-  const nlBtn = document.querySelector('.nl-btn');
-  const nlInput = document.querySelector('.nl-input');
-  if (nlBtn && nlInput) {
-    nlBtn.addEventListener('click', () => {
-      if (nlInput.value && nlInput.value.includes('@')) {
-        nlBtn.textContent = 'Subscribed ✓';
-        nlBtn.style.background = '#3D5C35';
-        nlInput.value = '';
-        nlInput.placeholder = 'Welcome to the community!';
-      } else {
-        nlInput.style.borderColor = '#C8942A';
-        nlInput.placeholder = 'Please enter a valid email';
-        setTimeout(() => { nlInput.style.borderColor = ''; nlInput.placeholder = 'your@email.com'; }, 2500);
-      }
-    });
+/* Add to cart */
+function addCart(btn){
+  const orig=btn.textContent;
+  btn.textContent='Added ✓';btn.classList.add('added');
+  setTimeout(()=>{btn.textContent=orig;btn.classList.remove('added')},2200);
+}
+
+/* Newsletter */
+function subscribe(){
+  const inp=document.getElementById('nl-email'),btn=document.getElementById('nl-btn');
+  if(inp.value&&inp.value.includes('@')){
+    btn.textContent='Subscribed ✓';btn.style.background='var(--ink)';
+    inp.value='';inp.placeholder='Welcome to the community!';
+    setTimeout(()=>{btn.textContent='Subscribe';btn.style.background='';inp.placeholder='your@email.com'},4000);
+  } else {
+    inp.style.outline='2px solid var(--gold-rich)';inp.placeholder='Please enter a valid email';inp.focus();
+    setTimeout(()=>{inp.style.outline='';inp.placeholder='your@email.com'},2500);
   }
+}
+document.getElementById('nl-email')?.addEventListener('keydown',e=>{if(e.key==='Enter')subscribe()});
 </script>
 </body>
 </html>
